@@ -1,0 +1,6 @@
+# Ignore .env files in signaling_backend and frontend
+signaling_backend/.env
+frontend/.env
+
+# Ignore everything inside the certs folder in frontend
+frontend/certs/
