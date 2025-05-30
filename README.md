@@ -94,7 +94,7 @@ Open your browser and navigate to `https://your_ip_address` (or `https://localho
 
 * **Vosk Container**: `2700` (Host)
 * **Nginx Proxy**: `2701` (Host, WSS)
-* **Signaling Backend**: `3001` (Host, HTTP)
+* **Signaling Backend**: `3001` (Host, HTTPS)
 * **Frontend Dev Server**: `5173` (Host, HTTPS)
 
 ---
