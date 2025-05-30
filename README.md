@@ -1,6 +1,4 @@
-Absolutely! Let's simplify the README and make it more professional, suitable for a portfolio project.
 
----
 
 # TRANSCENT
 
@@ -21,7 +19,7 @@ Before you begin, ensure you have the following installed on your system:
 * **Node.js & npm/yarn**: For managing application dependencies.
 * **Docker & Docker Compose**: For containerizing and orchestrating services.
 * **Vosk Docker Image**: A pre-built Vosk Docker image is required for the transcription service.
-* **SSL Certificates**: `mkcert` (or your existing `cert.key` and `cert.crt` files) configured for `192.168.0.112` and `localhost` in the `certs/` directory.
+* **SSL Certificates**: `mkcert` (or your existing `cert.key` and `cert.crt` files) configured for `your_ip_address` and `localhost` in the `certs/` directory.
 
 ---
 
@@ -35,10 +33,11 @@ Launch the Vosk Docker container, which powers the real-time transcription.
 
 ```bash
 # In the directory with Vosk's docker-compose.yml (recommended)
-docker-compose up -d
+docker run -d -p 2700:2700 -v /d/vsk/model_english:/opt/vosk-model-en/model alphacep/kaldi-en:latest
 
-# Alternatively, run directly (adjust image and port as needed)
-# docker run -d -p 2700:2700 <your-vosk-image-name>
+
+# Alternatively, you can use a model that you have locally too 
+#docker run -d -p 2700:2700 -v <NODEL_NAME>
 ```
 
 #### 2. Initialize Nginx Reverse Proxy
@@ -75,7 +74,7 @@ cd path/to/your/project/TRANSCENT/frontend
 npm install # or yarn install
 ```
 
-Ensure your `.env` file includes `VITE_VOSK_URL=wss://192.168.0.112:2701/`.
+Ensure your `.env` file includes `VITE_VOSK_URL=wss://your_ip_address:2701/`.
 
 ```bash
 npm run dev
@@ -85,9 +84,9 @@ The frontend will be served at `https://0.0.0.0:5173`.
 
 #### 5. Access the Application
 
-Open your browser and navigate to `https://192.168.0.112:5173` (or `https://localhost:5173`).
+Open your browser and navigate to `https://your_ip_address` (or `https://localhost:5173`).
 
-**SSL Certificate Acceptance**: You will likely encounter SSL warnings due to self-signed certificates. Please **accept** these warnings for both the frontend (Vite) and the Nginx WSS endpoint (`https://192.168.0.112:2701`) to ensure full application functionality. You might need to visit `https://192.168.0.112:2701` directly in your browser once to accept its certificate.
+**SSL Certificate Acceptance**: You will likely encounter SSL warnings due to self-signed certificates. Please **accept** these warnings for both the frontend (Vite) and the Nginx WSS endpoint (`https://your_ip_address:2701`) to ensure full application functionality. You might need to visit `https://your_ip_address:2701` directly in your browser once to accept its certificate.
 
 ---
 
