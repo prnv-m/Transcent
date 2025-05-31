@@ -81,13 +81,6 @@ const useSubtitle = (sendDataToAllPeers, enabled = false) => {
       }
       // voskSocketRef.current will be nulled by its onclose handler
     }
-    
-    // We don't close the AudioContext here as it might be reused or managed globally.
-    // If it was created specifically for this hook and won't be reused, closing it would be:
-    // if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
-    //   audioContextRef.current.close().then(() => console.log('AudioContext closed.'));
-    //   audioContextRef.current = null;
-    // }
 
     if (isTranscribing) setIsTranscribing(false); // Update state only if it was true
     // voskSocketReady will be set to false by the voskSocket.onclose handler
@@ -193,7 +186,7 @@ const useSubtitle = (sendDataToAllPeers, enabled = false) => {
       
       // Ensure the audio worklet module is added only once or handle errors if already added
       try {
-        await audioContextRef.current.audioWorklet.addModule('/audio-processor.js'); // Path relative to public folder
+        await audioContextRef.current.audioWorklet.addModule('/audio-processor.js'); 
       } catch (e) {
         if (e.name === 'InvalidStateError' && e.message.includes('already been loaded')) {
           // console.log('AudioWorklet module "audio-processor.js" already loaded.');
@@ -207,7 +200,6 @@ const useSubtitle = (sendDataToAllPeers, enabled = false) => {
       audioWorkletNodeRef.current = new AudioWorkletNode(audioContextRef.current, 'pcm-processor', {
         processorOptions: {
           targetSampleRate: TARGET_SAMPLE_RATE,
-          // bufferSize: 4096 // Example: If your worklet supports custom buffer sizes for its output
         }
       });
 
